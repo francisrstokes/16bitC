@@ -1,0 +1,17 @@
+.DS_Store
+.tmp
+.git
+node_modules/
+.settings
+*.log
+dist/
+.idea
+semantic
+.vscode
+bin/
+
+*.bin
+test.c
+test
+*.o
+main
