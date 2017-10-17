@@ -6,10 +6,7 @@
 // Definitions
 #define MEM_SIZE 0xFFFF
 
-// Variables
-extern uint16_t memory[MEM_SIZE];
-
 // Functions
-void loadProgram(char *path);
+void loadProgram(uint16_t (*memory)[MEM_SIZE], char *path);
 
 #endif

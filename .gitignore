@@ -15,3 +15,5 @@ test.c
 test
 *.o
 main
+16bitc
+TODO.txt

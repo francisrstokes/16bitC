@@ -3,9 +3,7 @@
 #include <stdio.h>
 #include "./memory.h"
 
-uint16_t memory[MEM_SIZE] = {0};
-
-void loadProgram(char *path) {
+void loadProgram(uint16_t (*memory)[MEM_SIZE], char *path) {
   FILE *fp;
   size_t size;
 
