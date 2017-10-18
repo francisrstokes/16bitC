@@ -6,16 +6,29 @@
 int main() {
   // Create memory and registers
   uint16_t memory[MEM_SIZE];
-  Registers registers;
+  uint16_t registers[NUM_REGISTERS] = {0};
 
-	char* filepath = "test.bin";
+	char* filepath = "fac.bin";
 	loadProgram(&memory, filepath);
 	printf("Done loading program.\n");
 
-  initialiseRegisters(&registers);
-	printf("Initialised registers.\n");
+  uint16_t instruction = fetchInstruction(memory, registers);
+  InstructionSplit split = splitInstruction(instruction);
+  printf("opcode: 0x%x\n", split.opcode);
+  printf("dest: 0x%x\n", split.dest);
+  printf("source: 0x%x\n", split.source);
+  printf("high8: 0x%x\n", split.high8);
+  printf("high10: 0x%x\n", split.high10);
 
-  printf("Instruction %d: %d\n", registers.IP, fetchInstruction(memory, &registers));
+  instruction = fetchInstruction(memory, registers);
+  split = splitInstruction(instruction);
+  printf("opcode: 0x%x\n", split.opcode);
+  printf("dest: 0x%x\n", split.dest);
+  printf("source: 0x%x\n", split.source);
+  printf("high8: 0x%x\n", split.high8);
+  printf("high10: 0x%x\n", split.high10);
+
+
 	return 0;
 };
 
