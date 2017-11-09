@@ -8,7 +8,7 @@ CFLAGS += -Wno-switch
 CFLAGS += -I deps
 LDFLAGS += -lm
 
-TEST_SRC = $(shell find src/*.c test/*.c)
+TEST_SRC = $(shell find src/*.c test/*.c | sed '/16bitc/d')
 TEST_OBJ = ${TEST_SRC:.c=.o}
 
 CFLAGS += -I src
