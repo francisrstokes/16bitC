@@ -11,8 +11,9 @@ semantic
 bin/
 
 *.bin
-src/test.c
+test.c
+test
 *.o
+main
 16bitc
 TODO.txt
-test_runner
