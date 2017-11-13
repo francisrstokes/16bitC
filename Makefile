@@ -1,40 +1,14 @@
-SRC = $(wildcard src/*.c)
-OBJ = ${SRC:.c=.o}
+16bitc : main.o memory.o cpu.o \
+				cc -o 16bitc main.o memory.o cpu.o
 
-CC = clang
-PREFIX = /usr/local
-CFLAGS = -std=c99 -g -O0 -Wno-parentheses -Wno-switch-enum -Wno-unused-value
-CFLAGS += -Wno-switch
-CFLAGS += -I deps
-LDFLAGS += -lm
+main.o : main.c memory.h
+        cc -c main.c
 
-TEST_SRC = $(shell find src/*.c test/*.c | sed '/16bitc/d')
-TEST_OBJ = ${TEST_SRC:.c=.o}
+cpu.o : cpu.c cpu.h
+        cc -c cpu.c
 
-CFLAGS += -I src
+memory.o : memory.c memory.h
+        cc -c memory.c
 
-OUT = 16bitc
-
-$(OUT): $(OBJ)
-	$(CC) $^ $(LDFLAGS) -o $@
-
-%.o: %.c
-	@$(CC) -c $(CFLAGS) $< -o $@
-	@printf "\e[36mCC\e[90m %s\e[0m\n" $@
-
-test: test_runner
-	@./$<
-
-test_runner: $(TEST_OBJ)
-	$(CC) $^ $(LDFLAGS) -o $@
-
-install: 16bitc
-	install 16bitc $(PREFIX)/bin
-
-uninstall:
-	rm $(PREFIX)/bin/16bitc
-
-clean:
-	rm -f 16bitc test_runner $(OBJ) $(TEST_OBJ)
-
-.PHONY: clean test install uninstall
+clean :
+        rm 16bitc main.o cpu.o memory.o
